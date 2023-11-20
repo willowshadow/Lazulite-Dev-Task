@@ -1,10 +1,7 @@
 namespace Player.Actions.Attack
 {
-    public class IAttack : ICommand
+    public abstract class IAttack : ICommand
     {
-        public void Execute()
-        {
-            
-        }
+        public abstract void Execute();
     }
 }

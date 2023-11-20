@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using AI.Actions;
 using AI.Decisions;
 using AI.States;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace AI
 {
-    public class AIBrain : MonoBehaviour
+    public class AIBrain : SerializedMonoBehaviour
     {
-        public List<State> states;
+        [GUIColor(31,22,0)]public List<State> states;
         public GameObject aiRoot;
+        
         private AIAction[] _actions;
         private Decision[] _decisions;
 
