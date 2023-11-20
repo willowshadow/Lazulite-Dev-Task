@@ -10,7 +10,7 @@ namespace AI
 {
     public class AIBrain : SerializedMonoBehaviour
     {
-        [GUIColor(31,22,0)]public List<State> states;
+        public List<State> states;
         public GameObject aiRoot;
         
         private AIAction[] _actions;
