@@ -4,7 +4,15 @@ namespace AI.Decisions
     {
         public override bool DoDecide()
         {
-            return false;
+            return true;
         }
+    }
+
+    public enum AttackType
+    {
+        Swipe,
+        Fire,
+        FireBall
+        
     }
 }

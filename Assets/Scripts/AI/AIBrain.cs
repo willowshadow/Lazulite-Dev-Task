@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using AI.Actions;
 using AI.Decisions;
 using AI.States;
+using Player.Abilities;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace AI
 {
@@ -17,10 +19,16 @@ namespace AI
         private Decision[] _decisions;
 
         private State _currentState;
+        public Transform target;
+        
+        public GameObject owner;
+        public float timeInState;
+
         private void Awake()
         {
             _actions = aiRoot.GetComponents<AIAction>();
             _decisions = aiRoot.GetComponents<Decision>();
+            owner = gameObject;
             
             foreach (var state in states)
             {
@@ -44,6 +52,7 @@ namespace AI
         public void Update()
         {
             if (_currentState == null) return;
+            timeInState += Time.deltaTime;
             _currentState.PerformActions();
             _currentState.CheckDecisions();
         }
@@ -55,17 +64,17 @@ namespace AI
                 var exist = states.Find(x => x.stateName == stateName);
                 if(exist is null) return;
                 exist.EnterState();
+                timeInState = 0;
             }
             else
             {
                 if(_currentState.stateName==stateName) return;
                 _currentState.ExitState();
                 var exist = states.Find(x => x.stateName == stateName);
-                if (exist is not null)
-                {
-                    _currentState = exist;
-                    _currentState.EnterState();
-                }
+                if (exist is null) return;
+                _currentState = exist;
+                _currentState.EnterState();
+                timeInState = 0;
             }
         }
 
@@ -80,6 +89,11 @@ namespace AI
             {
                 decision.Reset();
             }
+        }
+
+        public T GetAbility<T>() where T : Component
+        {
+            return GetComponent<T>();
         }
     }
 }

@@ -6,13 +6,12 @@ namespace Player.Abilities
     public class PlayerJump : Ability
     {
         public Rigidbody rigidBody;
-        public float speed;
         private bool _isJumping;
 
 
-        public override void Initialize(PlayerController playerController, InputManager inputManager)
+        public override void Initialize(PlayerController playerController)
         {
-            base.Initialize(playerController, inputManager);
+            base.Initialize(playerController);
             rigidBody = playerController.rigidBody;
         }
         public override void ProcessAbility()
@@ -20,13 +19,26 @@ namespace Player.Abilities
             base.ProcessAbility();
             Jump(_inputManager.jump);
         }
+        
+        public override void UpdateAnimator()
+        {
+            base.UpdateAnimator();
+            if (_isJumping)
+            {
+                _animator.Jump();
+                _isJumping = false;
+            }
+        }
 
         private void Jump(bool shouldJump)
         {
-            if(_isJumping) return;
-            if(!shouldJump) return;
+            if (!shouldJump || _isJumping || !_playerController.grounded)
+            {
+                return;
+            }
+
+            Debug.Log("Jumping");
             _isJumping = true;
-            _playerController.animationController.Jump();
         }
     }
 }

@@ -4,14 +4,8 @@ namespace AI.Decisions
 {
     public abstract class Decision : MonoBehaviour
     {
-        private AIBrain _brain;
+        public AIBrain Brain { get; set; }
 
-        public AIBrain Brain
-        {
-            get => _brain;
-            set => _brain = value;
-        }
-        
         public virtual void Initialize()
         {
             

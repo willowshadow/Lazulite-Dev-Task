@@ -1,10 +1,11 @@
 namespace Player.Actions.Attack
 {
-    public class FireAttack : IAttack
+    public class FireAttack : Attack
     {
+        public int modeValue;
         public override void Execute()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

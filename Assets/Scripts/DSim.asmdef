@@ -2,7 +2,9 @@
     "name": "DSim",
     "rootNamespace": "",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:d8ff72fdf1f9b014ab4291157a56a767",
+        "GUID:4a3ff88ec50ba774db78c4c32b4ddad8"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

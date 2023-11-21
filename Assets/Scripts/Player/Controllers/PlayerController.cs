@@ -16,8 +16,11 @@ namespace Player.Controllers
         public InputManager inputManager;
         public Rigidbody rigidBody;
         public AnimationController animationController;
+        public bool grounded;
 
 
+        public ICommand commands;
+        
         private void Awake()
         {
             InitializeComponents();
@@ -36,7 +39,7 @@ namespace Player.Controllers
             abilities = GetComponents<Ability>();
             foreach (var ability in abilities)
             {
-                ability.Initialize(this,inputManager);
+                ability.Initialize(this);
             }
         }
 
@@ -47,12 +50,32 @@ namespace Player.Controllers
                 ability.ProcessAbility();
             }
         }
+        
+        private void UpdateAnimator()
+        {
+            foreach (var ability in abilities)
+            {
+                ability.UpdateAnimator();
+            }
+        }
+        
+        private void GroundCheck()
+        {
+            grounded = Physics.Raycast(transform.position, Vector3.down, .1f);
+        }
 
         #region Unity Events
         private void Update()
         {
             ProcessAbilities();
+            UpdateAnimator();
         }
+
+        private void FixedUpdate()
+        {
+            GroundCheck();
+        }
+
         #endregion
     }
 }

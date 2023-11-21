@@ -6,17 +6,23 @@ namespace Player.Abilities
     public abstract class Ability : MonoBehaviour
     {
         protected PlayerController _playerController;
+        protected AnimationController _animator;
         protected InputManager _inputManager;
         
         public virtual void ProcessAbility()
         {
             
         }
-
-        public virtual void Initialize(PlayerController playerController,InputManager inputManager)
+        
+        public virtual void UpdateAnimator()
+        {
+            
+        }
+        public virtual void Initialize(PlayerController playerController)
         {
             _playerController = playerController;
-            _inputManager = inputManager;
+            _inputManager = _playerController.inputManager;
+            _animator = _playerController.animationController;
         }
     }
 }

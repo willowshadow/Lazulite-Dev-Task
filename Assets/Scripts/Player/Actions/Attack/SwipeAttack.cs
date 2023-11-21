@@ -1,6 +1,6 @@
 namespace Player.Actions.Attack
 {
-    public class TailAttack : Attack
+    public class SwipeAttack : Attack
     {
         public override void Execute()
         {

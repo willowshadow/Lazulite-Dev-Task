@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player.Controllers
 {
@@ -8,13 +9,18 @@ namespace Player.Controllers
         public Animator animator;
 
         public int jump = Animator.StringToHash("jump");
-        public int moveSpeed = Animator.StringToHash("speed");
+        public int moveSpeedH = Animator.StringToHash("Horizontal");
+        public int moveSpeedV = Animator.StringToHash("Vertical");
         public int rotVal = Animator.StringToHash("rotVal");
         public int fire = Animator.StringToHash("fire");
         public int tail = Animator.StringToHash("tail");
         public int death = Animator.StringToHash("death");
         public int attackL = Animator.StringToHash("attackL");
         public int attackR = Animator.StringToHash("attackR");
+        public int stateOn = Animator.StringToHash("StateOn");
+        public int state = Animator.StringToHash("State");
+        public int modeOn = Animator.StringToHash("ModeOn");
+        public int mode = Animator.StringToHash("Mode");
 
         private void Awake()
         {
@@ -22,12 +28,17 @@ namespace Player.Controllers
         }
 
         public void Jump()
-        {
-            animator.SetTrigger(jump);
+        { 
+            StateOn();
+            State(2);
         }
-        public void Move(float speed)
+        public void MoveHorizontal(float speed)
         {
-            animator.SetFloat(moveSpeed,speed);
+            animator.SetFloat(moveSpeedH,speed);
+        }
+        public void MoveVertical(float speed)
+        {
+            animator.SetFloat(moveSpeedV,speed);
         }
         public void Rotate(float rotVal)
         {
@@ -43,7 +54,8 @@ namespace Player.Controllers
         }
         public void Death()
         {
-            animator.SetTrigger(death);
+            StateOn();
+            State(10);
         }
         public void AttackL()
         {
@@ -52,6 +64,23 @@ namespace Player.Controllers
         public void AttackR()
         {
             animator.SetTrigger(attackR);
+        }
+
+        public void StateOn()
+        {
+            animator.SetTrigger(stateOn);
+        }
+        public void State(int state)
+        {
+            animator.SetInteger(this.state,state);
+        }
+        public void ModeOn()
+        {
+            animator.SetTrigger(modeOn);
+        }
+        public void Mode(int mode)
+        {
+            animator.SetInteger(this.mode,mode);
         }
     }
 }

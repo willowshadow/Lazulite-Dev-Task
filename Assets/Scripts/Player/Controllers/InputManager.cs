@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -14,7 +15,32 @@ namespace Player.Controllers
         public bool ability2;
         public bool ability3;
         public bool jump;
+        private Camera _camera;
 
+        public Transform lookPoint;
+        private void Awake()
+        {
+            _camera = Camera.main;
+        }
+
+        private void Update()
+        {
+            LookPosition();
+        }
+
+        private void LookPosition()
+        {
+            var ray = _camera.ScreenPointToRay(mousePosition);
+            
+            if (Physics.Raycast(ray, out var hitInfo))
+            {
+                lookPoint.position = hitInfo.point;
+            }
+            else
+            {
+                lookPoint.position = ray.origin + ray.direction * 100;
+            }
+        }
         public void OnMove(InputAction.CallbackContext context)
         {
             inputVector = context.ReadValue<Vector2>();
@@ -83,11 +109,10 @@ namespace Player.Controllers
 
         public void Jump(InputAction.CallbackContext context)
         {
-            if (context.started)
-            {
+            if(context.performed){
                 jump = true;
             }
-            else
+            else if(context.canceled)
             {
                 jump = false;
             }
