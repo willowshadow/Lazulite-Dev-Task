@@ -862,8 +862,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10369843, y: -0.19967134, z: 0.02125552, w: 0.9741284}
-  m_LocalPosition: {x: -15.150001, y: 1.27, z: -1.79}
+  m_LocalRotation: {x: 0.0862899, y: -0.052458834, z: 0.0045499736, w: 0.99487764}
+  m_LocalPosition: {x: -4.3042593, y: 0.9029999, z: 10.278614}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1562,25 +1562,37 @@ MonoBehaviour:
   - stateName: AttackSwipe
     actions:
     - {fileID: 1987605739}
-    transitions: []
+    transitions:
+    - aiDecision: {fileID: 1987605735}
+      trueStateName: AttackSwipe
+      falseStateName: Patrol Random
   - stateName: AttackFire
     actions:
     - {fileID: 1987605747}
     - {fileID: 1987605741}
     - {fileID: 1987605742}
-    transitions: []
+    transitions:
+    - aiDecision: {fileID: 1987605735}
+      trueStateName: AttackFire
+      falseStateName: Patrol Random
   - stateName: AttackFireBall
     actions:
     - {fileID: 1987605747}
     - {fileID: 1987605746}
     - {fileID: 1987605742}
-    transitions: []
+    transitions:
+    - aiDecision: {fileID: 1987605735}
+      trueStateName: AttackFireBall
+      falseStateName: Patrol Random
   - stateName: AttackTail
     actions:
     - {fileID: 1987605747}
     - {fileID: 1987605745}
     - {fileID: 1987605742}
-    transitions: []
+    transitions:
+    - aiDecision: {fileID: 1987605735}
+      trueStateName: AttackTail
+      falseStateName: Patrol Random
   - stateName: FollowTarget
     actions:
     - {fileID: 1987605747}
@@ -3872,7 +3884,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608526173}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.029128797, y: 0.9379472, z: -0.08135209, w: 0.33583987}
+  m_LocalRotation: {x: 0.02912879, y: 0.9379472, z: -0.08135207, w: 0.33583993}
   m_LocalPosition: {x: -16.79, y: 0.81, z: 1.8700004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4313,8 +4325,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911924591}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10369843, y: -0.19967134, z: 0.02125552, w: 0.9741284}
-  m_LocalPosition: {x: -15.150001, y: 1.27, z: -1.79}
+  m_LocalRotation: {x: 0.0862899, y: -0.052458834, z: 0.0045499736, w: 0.99487764}
+  m_LocalPosition: {x: -4.3042593, y: 0.9029999, z: 10.278614}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

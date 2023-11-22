@@ -5,6 +5,7 @@ using AI.Actions;
 using AI.Decisions;
 using AI.States;
 using Player.Abilities;
+using Player.Controllers;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -24,6 +25,7 @@ namespace AI
         
         public GameObject owner;
         public float timeInState;
+        public PlayerController playerController;
 
         private void Awake()
         {
@@ -55,6 +57,7 @@ namespace AI
         public void Update()
         {
             if (_currentState == null) return;
+            if (playerController.isDead) return;
             timeInState += Time.deltaTime;
             _currentState.PerformActions();
             _currentState.CheckDecisions();
