@@ -15,8 +15,8 @@ namespace AI
         public List<State> states;
         public GameObject aiRoot;
         
-        private AIAction[] _actions;
-        private Decision[] _decisions;
+        [ShowInInspector]private AIAction[] _actions;
+        [ShowInInspector]private Decision[] _decisions;
 
         private State _currentState;
         public Transform target;
@@ -40,7 +40,7 @@ namespace AI
         {
             foreach (var action in _actions)
             {
-                action.Initialize();
+                action.Initialize(this);
             }
 
             foreach (var decision in _decisions)

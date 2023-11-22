@@ -7,7 +7,7 @@ namespace Common
     public class ParticleDamageOnContact : MonoBehaviour
     {
         public LayerMask damageLayer;
-        public int damage;
+        public float damage;
 
         private void OnParticleTrigger()
         {

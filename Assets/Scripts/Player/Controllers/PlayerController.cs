@@ -17,10 +17,9 @@ namespace Player.Controllers
         public Rigidbody rigidBody;
         public AnimationController animationController;
         public bool grounded;
+        public bool isAI;
 
 
-        public ICommand commands;
-        
         private void Awake()
         {
             InitializeComponents();
@@ -45,6 +44,7 @@ namespace Player.Controllers
 
         private void ProcessAbilities()
         {
+            if(isAI) return;
             foreach (var ability in abilities)
             {
                 ability.ProcessAbility();

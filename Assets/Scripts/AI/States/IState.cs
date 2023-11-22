@@ -25,7 +25,7 @@ namespace AI.States
         {
             foreach (var aiAction in actions)
             {
-                aiAction.Initialize();
+                aiAction.Initialize(_brain);
             }
 
             foreach (var transition in transitions)

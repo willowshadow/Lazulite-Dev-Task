@@ -11,7 +11,7 @@ namespace AI.Decisions
         
         private bool _lastValue;
         [SerializeField] private float radius;
-        [SerializeField] private int targetLayerMask;
+        [SerializeField] private LayerMask targetLayerMask;
         private Collider[] _hits;
 
         public override bool DoDecide()

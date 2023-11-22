@@ -17,7 +17,7 @@ namespace AI.Actions
                 return;
             }
             
-            var directionToTarget = Brain.target.position - transform.position;
+            var directionToTarget = transform.position - Brain.target.position;
             var movementVector = Vector2.zero;
             movementVector.x = directionToTarget.x;
             movementVector.y = directionToTarget.z;
@@ -37,10 +37,16 @@ namespace AI.Actions
             }
         }
 
-        public override void Initialize()
+        public override void Initialize(AIBrain aiBrain)
         {
-            base.Initialize();
+            base.Initialize(Brain);
             playerMovement=Brain.GetAbility<PlayerMovement>();
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            playerMovement.SetMovement(Vector2.zero);
         }
     }
 }

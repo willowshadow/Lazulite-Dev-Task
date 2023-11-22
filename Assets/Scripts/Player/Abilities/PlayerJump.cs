@@ -1,3 +1,4 @@
+using System;
 using Player.Controllers;
 using UnityEngine;
 
@@ -13,11 +14,14 @@ namespace Player.Abilities
         {
             base.Initialize(playerController);
             rigidBody = playerController.rigidBody;
+            if(playerController.isAI) return;
+            _inputManager.OnJump += Jump;
         }
+
+
         public override void ProcessAbility()
         {
             base.ProcessAbility();
-            Jump(_inputManager.jump);
         }
         
         public override void UpdateAnimator()
@@ -29,16 +33,18 @@ namespace Player.Abilities
                 _isJumping = false;
             }
         }
-
-        private void Jump(bool shouldJump)
+        
+        private void Jump()
         {
-            if (!shouldJump || _isJumping || !_playerController.grounded)
+            if (_playerController.grounded)
             {
-                return;
+                _isJumping = true; 
             }
+        }
 
-            Debug.Log("Jumping");
-            _isJumping = true;
+        private void OnDestroy()
+        {
+            _inputManager.OnJump -= Jump;
         }
     }
 }

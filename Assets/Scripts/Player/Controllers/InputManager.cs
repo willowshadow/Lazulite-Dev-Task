@@ -18,6 +18,15 @@ namespace Player.Controllers
         private Camera _camera;
 
         public Transform lookPoint;
+
+
+        public event Action OnJump;
+        public event Action OnPrimaryAttack;
+        public event Action OnSecondaryAttack;
+        public event Action OnAbility1;
+        public event Action OnAbility2;
+        public event Action OnAbility3;
+        
         private void Awake()
         {
             _camera = Camera.main;
@@ -55,66 +64,43 @@ namespace Player.Controllers
         {
             if (context.started)
             {
-                primary = true;
-            }
-            else
-            {
-                primary = false;
+                OnPrimaryAttack?.Invoke();
+            
             }
         }
         public void SecondaryAttack(InputAction.CallbackContext context)
         {
             if (context.started)
             {
-                secondary = true;
-            }
-            else
-            {
-                secondary = false;
+                OnSecondaryAttack?.Invoke();
             }
         }
         public void Ability1(InputAction.CallbackContext context)
         {
             if (context.started)
             {
-                ability1 = true;
-            }
-            else
-            {
-                ability1 = false;
+                OnAbility1?.Invoke();
             }
         }
         public void Ability2(InputAction.CallbackContext context)
         {
             if (context.started)
             {
-                ability2 = true;
-            }
-            else
-            {
-                ability2 = false;
+                OnAbility2?.Invoke();
             }
         }
         public void Ability3(InputAction.CallbackContext context)
         {
             if (context.started)
             {
-                ability3 = true;
-            }
-            else
-            {
-                ability3 = false;
+                OnAbility3?.Invoke();
             }
         }
 
         public void Jump(InputAction.CallbackContext context)
         {
             if(context.performed){
-                jump = true;
-            }
-            else if(context.canceled)
-            {
-                jump = false;
+                OnJump?.Invoke();
             }
         }
     }

@@ -17,6 +17,7 @@ namespace Player.Abilities
         public override void ProcessAbility()
         {
             base.ProcessAbility();
+            if(_playerController.isAI) return;
             HandledInput();
             SetMovement(inputVector);
         }

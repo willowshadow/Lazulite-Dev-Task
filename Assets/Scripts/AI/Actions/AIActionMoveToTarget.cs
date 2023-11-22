@@ -1,3 +1,4 @@
+using Player.Abilities;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,13 +6,12 @@ namespace AI.Actions
 {
     public class AIActionMoveToTarget : AIAction
     {
-        public NavMeshAgent agent;
-        public float minDistance;
-        public override void Initialize()
+        public PlayerMovement playerMovement;
+        [SerializeField] private double maximumDistance;
+        public override void Initialize(AIBrain aiBrain)
         {
-            base.Initialize();
-            agent = Brain.GetComponent<NavMeshAgent>();
-            agent.stoppingDistance = minDistance;
+            base.Initialize(Brain);
+            playerMovement=Brain.GetAbility<PlayerMovement>();
         }
 
         public override void DoActions()
@@ -20,14 +20,30 @@ namespace AI.Actions
             {
                 return;
             }
-            if(agent.hasPath) return;
-            agent.SetDestination(Brain.target.position);
+            var directionToTarget = Brain.target.position - transform.position;
+            var movementVector = Vector2.zero;
+            movementVector.x = directionToTarget.x;
+            movementVector.y = directionToTarget.z;
+            playerMovement.SetMovement(-movementVector);
+
+
+            if (Mathf.Abs(transform.position.x - Brain.target.position.x) > maximumDistance)
+            {
+                movementVector.x = 0f;
+                playerMovement.SetMovement(-movementVector);
+            }
+
+            if (Mathf.Abs(transform.position.z - Brain.target.position.z) > maximumDistance)
+            {
+                movementVector.y = 0f;
+                playerMovement.SetMovement(-movementVector);
+            }
         }
 
         public override void Reset()
         {
             base.Reset();
-            agent.ResetPath();
+            playerMovement.SetMovement(Vector2.zero);
         }
     }
 }

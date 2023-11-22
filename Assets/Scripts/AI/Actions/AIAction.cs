@@ -13,7 +13,7 @@ namespace AI.Actions
             set => _brain = value;
         }
         
-        public virtual void Initialize()
+        public virtual void Initialize(AIBrain aiBrain)
         {
             
         }

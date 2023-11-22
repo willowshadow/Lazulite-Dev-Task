@@ -1,10 +1,14 @@
+using UnityEngine;
+
 namespace Player.Actions.Attack
 {
     public class TailAttack : Attack
     {
-        public override void Execute()
+        public override void ExecuteAttack()
         {
-            throw new System.NotImplementedException();
+            var random = Random.Range(0, modeRange.Count);
+            var mode = modeRange[random];
+            animationController.AttackWithParameter(mode);
         }
     }
 }

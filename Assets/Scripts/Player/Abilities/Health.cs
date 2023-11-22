@@ -8,7 +8,7 @@ namespace Player.Abilities
 {
     public class Health : MonoBehaviour
     {
-        public int health;
+        public float health;
         public int maxHealth;
         public PlayerController playerController;
         public FloatScriptableEvent onHealthChange;
@@ -21,7 +21,7 @@ namespace Player.Abilities
             onMaxHealth.Raise(maxHealth);
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             health -= damage;
             onHealthChange.Raise(health);

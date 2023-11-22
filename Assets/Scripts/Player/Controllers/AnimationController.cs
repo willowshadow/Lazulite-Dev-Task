@@ -12,11 +12,6 @@ namespace Player.Controllers
         public int moveSpeedH = Animator.StringToHash("Horizontal");
         public int moveSpeedV = Animator.StringToHash("Vertical");
         public int rotVal = Animator.StringToHash("rotVal");
-        public int fire = Animator.StringToHash("fire");
-        public int tail = Animator.StringToHash("tail");
-        public int death = Animator.StringToHash("death");
-        public int attackL = Animator.StringToHash("attackL");
-        public int attackR = Animator.StringToHash("attackR");
         public int stateOn = Animator.StringToHash("StateOn");
         public int state = Animator.StringToHash("State");
         public int modeOn = Animator.StringToHash("ModeOn");
@@ -44,28 +39,12 @@ namespace Player.Controllers
         {
             animator.SetFloat(this.rotVal,rotVal);
         }
-        public void Fire()
-        {
-            animator.SetTrigger(fire);
-        }
-        public void Tail()
-        {
-            animator.SetTrigger(tail);
-        }
+        
         public void Death()
         {
             StateOn();
             State(10);
         }
-        public void AttackL()
-        {
-            animator.SetTrigger(attackL);
-        }
-        public void AttackR()
-        {
-            animator.SetTrigger(attackR);
-        }
-
         public void StateOn()
         {
             animator.SetTrigger(stateOn);
@@ -81,6 +60,13 @@ namespace Player.Controllers
         public void Mode(int mode)
         {
             animator.SetInteger(this.mode,mode);
+        }
+
+        public void AttackWithParameter(int i)
+        {
+            ModeOn();
+            Mode(i);
+            Mode(0);
         }
     }
 }

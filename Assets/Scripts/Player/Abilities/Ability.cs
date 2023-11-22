@@ -21,8 +21,9 @@ namespace Player.Abilities
         public virtual void Initialize(PlayerController playerController)
         {
             _playerController = playerController;
-            _inputManager = _playerController.inputManager;
             _animator = _playerController.animationController;
+            if(_playerController.isAI) return;
+            _inputManager = _playerController.inputManager;
         }
     }
 }

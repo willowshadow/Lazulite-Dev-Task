@@ -1,7 +1,20 @@
+using System;
+using System.Collections.Generic;
+using Player.Controllers;
+using UnityEngine;
+
 namespace Player.Actions.Attack
 {
-    public abstract class Attack : ICommand
+    public abstract class Attack : MonoBehaviour
     {
-        public abstract void Execute();
+        public AnimationController animationController;
+
+        private void Awake()
+        {
+            animationController = GetComponent<AnimationController>();
+        }
+
+        public List<int> modeRange;
+        public abstract void ExecuteAttack();
     }
 }
