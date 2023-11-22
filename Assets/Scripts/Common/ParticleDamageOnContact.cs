@@ -11,7 +11,7 @@ namespace Common
 
         private void OnParticleTrigger()
         {
-            var health = GetComponent<Health>();
+            var health = GetComponent<IDamageable>();
             if (health != null)
             {
                 health.TakeDamage(damage);

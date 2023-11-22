@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -23,8 +25,8 @@ namespace AI.Decisions
 
             lastTargetCheckTimestamp = Time.time;
             
-            int targetsFound = Physics.OverlapSphereNonAlloc(transform.position, radius, _hits, targetLayerMask);
-
+            int targetsFound = Physics.OverlapSphereNonAlloc(transform.position, radius, _hits, targetLayerMask.value);
+            Debug.Log(targetsFound);
             if (targetsFound == 0)
             {
                 _lastValue = false;
@@ -48,6 +50,14 @@ namespace AI.Decisions
             
             _lastValue = false;
             return false;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            #if UNITY_EDITOR
+            Handles.DrawWireDisc(transform.position, transform.up, radius);
+            #endif
         }
     }
 }

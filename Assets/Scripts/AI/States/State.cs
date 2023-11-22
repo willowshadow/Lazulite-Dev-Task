@@ -32,7 +32,7 @@ namespace AI.States
             {
                 if (transition.aiDecision is not null)
                 {
-                    transition.aiDecision.Initialize();
+                    transition.aiDecision.Initialize(_brain);
                 }
             }
         }

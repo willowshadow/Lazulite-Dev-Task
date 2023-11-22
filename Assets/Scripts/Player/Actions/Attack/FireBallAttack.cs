@@ -14,7 +14,8 @@ namespace Player.Actions.Attack
             animationController.AttackWithParameter(mode);
             
             var projectile = Instantiate(damageParticle, mouth.position, Quaternion.identity);
-            projectile.Shoot(transform.forward);
+            var t = transform;
+            projectile.Shoot(t.forward,t.root);
         }
     }
 }

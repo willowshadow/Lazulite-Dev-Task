@@ -15,7 +15,7 @@ namespace AI.Actions
         
         public virtual void Initialize(AIBrain aiBrain)
         {
-            
+            _brain = aiBrain;
         }
 
         public virtual void Reset()

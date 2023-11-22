@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -66,7 +67,10 @@ namespace Player.Controllers
         {
             ModeOn();
             Mode(i);
-            Mode(0);
+            DOVirtual.DelayedCall(1f, () =>
+            {
+                Mode(0);
+            });
         }
     }
 }

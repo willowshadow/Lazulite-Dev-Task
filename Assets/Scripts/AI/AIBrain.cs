@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AI.Actions;
 using AI.Decisions;
 using AI.States;
@@ -29,15 +30,10 @@ namespace AI
             _actions = aiRoot.GetComponents<AIAction>();
             _decisions = aiRoot.GetComponents<Decision>();
             owner = gameObject;
-            
             foreach (var state in states)
             {
                 state.Brain = this;
             }
-        }
-
-        private void Start()
-        {
             foreach (var action in _actions)
             {
                 action.Initialize(this);
@@ -45,8 +41,15 @@ namespace AI
 
             foreach (var decision in _decisions)
             {
-                decision.Initialize();
+                decision.Initialize(this);
             }
+            
+        }
+
+        private void Start()
+        {
+            _currentState = null;
+            TransitionToState(states.First().stateName);
         }
 
         public void Update()
@@ -63,7 +66,8 @@ namespace AI
             {
                 var exist = states.Find(x => x.stateName == stateName);
                 if(exist is null) return;
-                exist.EnterState();
+                _currentState = exist;
+                _currentState.EnterState();
                 timeInState = 0;
             }
             else

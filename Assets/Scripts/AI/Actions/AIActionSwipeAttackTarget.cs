@@ -9,7 +9,7 @@ namespace AI.Actions
 
         public override void Initialize(AIBrain aiBrain)
         {
-            base.Initialize(Brain);
+            base.Initialize(aiBrain);
             attackManager = Brain.GetComponent<AttackManager>();
         }
 

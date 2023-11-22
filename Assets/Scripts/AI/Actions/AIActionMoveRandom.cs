@@ -9,6 +9,8 @@ namespace AI.Actions
         public float maximumTime;
         public float timeSinceMovement;
         public bool isMoving;
+        private Vector2 _lastDirection;
+
         public override void Initialize(AIBrain aiBrain)
         {
             base.Initialize(aiBrain);
@@ -16,23 +18,31 @@ namespace AI.Actions
         }
         public override void DoActions()
         {
-            if(isMoving && timeSinceMovement < maximumTime)
+            if(isMoving)
             {
                 timeSinceMovement += Time.deltaTime;
+                playerMovement.SetInput(_lastDirection);
+                playerMovement.SetMovement();
+                if (timeSinceMovement > maximumTime)
+                {
+                    isMoving = false;
+                }
+                
                 return;
             }
 
-            isMoving = false;
             timeSinceMovement = 0;
             var randomVertical = Random.Range(0, 1f);
             var randomHorizontal = Random.Range(0, 1f);
-            playerMovement.SetMovement(new Vector2(randomHorizontal, randomVertical));
+            _lastDirection = new Vector2(randomHorizontal, randomVertical);
+            isMoving = true;
         }
 
         public override void Reset()
         {
             base.Reset();
-            playerMovement.SetMovement(Vector2.zero);
+            playerMovement.SetInput(Vector2.zero);
+            playerMovement.SetMovement();
         }
     }
 }

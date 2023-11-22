@@ -1,4 +1,5 @@
 using System;
+using CHARK.ScriptableEvents.Events;
 using Player.Abilities;
 using UnityEngine;
 
@@ -18,10 +19,16 @@ namespace Player.Controllers
         public AnimationController animationController;
         public bool grounded;
         public bool isAI;
+        public bool isDead;
 
-
+        public TransformScriptableEvent onPlayerBroadcast;
+        public static event Action<PlayerController> onPlayerSpawn;
+        public static event Action<PlayerController> onAISpawn;
         private void Awake()
         {
+            if(isAI)onAISpawn?.Invoke(this);
+            else onPlayerSpawn?.Invoke(this);
+            
             InitializeComponents();
             InitializeAbilities();
         }

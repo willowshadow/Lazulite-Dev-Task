@@ -44,6 +44,7 @@ namespace Player.Abilities
 
         private void OnDestroy()
         {
+            if(_playerController.isAI) return;
             _inputManager.OnJump -= Jump;
         }
     }

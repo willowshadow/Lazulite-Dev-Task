@@ -19,13 +19,18 @@ namespace Player.Abilities
             base.ProcessAbility();
             if(_playerController.isAI) return;
             HandledInput();
-            SetMovement(inputVector);
+            SetMovement();
         }
 
-        private void HandledInput()
-        { 
-            inputVector = Vector2.MoveTowards(inputVector, _inputManager.inputVector, Time.deltaTime);
+        public void SetInput(Vector2 input)
+        {
+            inputVector = Vector2.MoveTowards(inputVector, input, Time.deltaTime);;
         }
+        private void HandledInput()
+        {
+            var newValue = _inputManager.inputVector;
+            SetInput(newValue);
+        }   
 
         override public void UpdateAnimator()
         {
@@ -39,9 +44,9 @@ namespace Player.Abilities
             }
         }
 
-        public void SetMovement(Vector2 input)
+        public void SetMovement()
         {
-            Vector3 moveVector = new Vector3(input.x, 0, input.y);
+            Vector3 moveVector = new Vector3(inputVector.x, 0, inputVector.y);
             characterController.Move(moveVector * (speed * Time.deltaTime));
         }
     }

@@ -19747,6 +19747,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4635413933502147457}
   force: 1000
+  onHitEffect: {fileID: 0}
+  damageOnContact: {fileID: 0}
 --- !u!54 &4635413933502147457
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19807,7 +19809,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b7e294d394f4b119b0a1eebc009b0a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  owner: {fileID: 3310820009152617773, guid: ed58507349914c842b10aaefe1af98b5, type: 3}
   damage: 30
+  coolDown: 0

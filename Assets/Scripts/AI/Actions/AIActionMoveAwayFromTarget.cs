@@ -21,32 +21,36 @@ namespace AI.Actions
             var movementVector = Vector2.zero;
             movementVector.x = directionToTarget.x;
             movementVector.y = directionToTarget.z;
-            playerMovement.SetMovement(-movementVector);
+            playerMovement.SetInput(-movementVector);
+            playerMovement.SetMovement();
 
 
             if (Mathf.Abs(transform.position.x - Brain.target.position.x) > maximumDistance)
             {
                 movementVector.x = 0f;
-                playerMovement.SetMovement(-movementVector);
+                playerMovement.SetInput(-movementVector);
+                playerMovement.SetMovement();
             }
 
             if (Mathf.Abs(transform.position.z - Brain.target.position.z) > maximumDistance)
             {
                 movementVector.y = 0f;
-                playerMovement.SetMovement(-movementVector);
+                playerMovement.SetInput(-movementVector);
+                playerMovement.SetMovement();
             }
         }
 
         public override void Initialize(AIBrain aiBrain)
         {
-            base.Initialize(Brain);
+            base.Initialize(aiBrain);
             playerMovement=Brain.GetAbility<PlayerMovement>();
         }
 
         public override void Reset()
         {
             base.Reset();
-            playerMovement.SetMovement(Vector2.zero);
+            playerMovement.SetInput(Vector2.zero);
+            playerMovement.SetMovement();
         }
     }
 }
