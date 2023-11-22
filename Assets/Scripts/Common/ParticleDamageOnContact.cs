@@ -11,6 +11,7 @@ namespace Common
 
         private void OnParticleTrigger()
         {
+            Debug.Log("Particle Triggered");
             var health = GetComponent<IDamageable>();
             if (health != null)
             {

@@ -31,6 +31,7 @@ namespace AI
         {
             _actions = aiRoot.GetComponents<AIAction>();
             _decisions = aiRoot.GetComponents<Decision>();
+            playerController = GetComponent<PlayerController>();
             owner = gameObject;
             foreach (var state in states)
             {
