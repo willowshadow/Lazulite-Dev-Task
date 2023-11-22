@@ -22,9 +22,11 @@ namespace AI.Actions
             }
             var directionToTarget = Brain.target.position - transform.position;
             var movementVector = Vector2.zero;
-            movementVector.x = directionToTarget.x;
-            movementVector.y = directionToTarget.z;
-            playerMovement.SetInput(-movementVector);
+            var percentage = 1-Vector3.Dot(Brain.owner.transform.forward, directionToTarget.normalized);
+            Debug.Log(percentage);
+            movementVector.x = directionToTarget.x*percentage;
+            movementVector.y = directionToTarget.z*percentage;
+            playerMovement.SetInput(movementVector);
             playerMovement.SetMovement();
 
 

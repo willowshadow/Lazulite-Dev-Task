@@ -70,6 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7551392600745718345, guid: 19e5b513668805f43a5d9ab53d1b6013,
         type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7551392600745718345, guid: 19e5b513668805f43a5d9ab53d1b6013,
+        type: 3}
       propertyPath: damageLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}

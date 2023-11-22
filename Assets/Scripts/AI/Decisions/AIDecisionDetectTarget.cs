@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Player.Controllers;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,11 +11,10 @@ namespace AI.Decisions
     {
         [SerializeField] private float targetCheckFrequency;
         [SerializeField] private float lastTargetCheckTimestamp;
-        
-        private bool _lastValue;
         [SerializeField] private float radius;
         [SerializeField] private LayerMask targetLayerMask;
         private Collider[] _hits;
+        private bool _lastValue;
 
         public override bool DoDecide()
         {
@@ -25,27 +25,33 @@ namespace AI.Decisions
 
             lastTargetCheckTimestamp = Time.time;
             
-            int targetsFound = Physics.OverlapSphereNonAlloc(transform.position, radius, _hits, targetLayerMask.value);
-            Debug.Log(targetsFound);
-            if (targetsFound == 0)
+            _hits = Physics.OverlapSphere(transform.position, radius,targetLayerMask);
+            if (_hits.Length == 0)
             {
+                Brain.target = null;
                 _lastValue = false;
                 return false;
             }
             
-            for (int i = 0; i < targetsFound; i++)
+            for (int i = 0; i < _hits.Length; i++)
             {
                 if (_hits[i] == null)
                 {
                     continue;
                 }
                 
-                if ((_hits[i].gameObject == Brain.owner) || (_hits[i].transform.IsChildOf(transform)))
+                if ((_hits[i].gameObject == Brain.owner) || (_hits[i].transform.IsChildOf(Brain.transform)))
                 {
                     continue;
-                }    
-                Brain.target = _hits[i].transform;
-                return _lastValue=true;
+                }
+
+                if (_hits[i].TryGetComponent(out PlayerController playerController))
+                {
+                    Brain.target = _hits[i].transform;
+                    return _lastValue=true;
+                }
+                
+                return _lastValue=false;
             }
             
             _lastValue = false;

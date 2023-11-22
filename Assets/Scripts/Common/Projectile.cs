@@ -29,8 +29,7 @@ namespace Common
         {
             if(_owner == other.gameObject) return;
             if(other.gameObject.transform.IsChildOf(_owner.transform)) return;
-            if(onHitEffect != null)
-                Instantiate(onHitEffect, transform.position, Quaternion.identity);
+            if(onHitEffect != null) Instantiate(onHitEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

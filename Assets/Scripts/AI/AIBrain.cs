@@ -60,6 +60,10 @@ namespace AI
             _currentState.CheckDecisions();
         }
 
+        /// <summary>
+        /// Transitions to a new state
+        /// </summary>
+        /// <param name="stateName"></param>
         public void TransitionToState(string stateName)
         {
             if (_currentState == null)
@@ -95,6 +99,12 @@ namespace AI
             }
         }
 
+        
+        /// <summary>
+        /// Finds and returns the ability
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T GetAbility<T>() where T : Component
         {
             return GetComponent<T>();

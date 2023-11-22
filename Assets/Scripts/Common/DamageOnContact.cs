@@ -5,15 +5,18 @@ using UnityEngine;
 
 namespace Common
 {
+    /// <summary>
+    /// Damages on Contact
+    /// </summary>
     public class DamageOnContact : MonoBehaviour
     {
         public GameObject owner;
         public int damage;
         public float coolDown;
         
-        private void Start()
+        private void Awake()
         {
-            owner ??= transform.root.gameObject;
+            owner = transform.root.gameObject;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -21,7 +24,6 @@ namespace Common
             if(owner == other.gameObject) return;
             if(other.gameObject.transform.IsChildOf(owner.transform)) return;
             if (coolDown > 0) return;
-            Debug.Log("OnTriggerEnter " + other.gameObject.name,this);
             var health = other.GetComponent<IDamageable>();
             if (health != null)
             {

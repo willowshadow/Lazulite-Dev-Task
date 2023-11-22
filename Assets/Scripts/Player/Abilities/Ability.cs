@@ -3,12 +3,18 @@ using UnityEngine;
 
 namespace Player.Abilities
 {
+    /// <summary>
+    /// Base class for Abilities, can be used to create custom abilities
+    /// </summary>
     public abstract class Ability : MonoBehaviour
     {
         protected PlayerController _playerController;
         protected AnimationController _animator;
         protected InputManager _inputManager;
         
+        /// <summary>
+        /// Process the ability
+        /// </summary>
         public virtual void ProcessAbility()
         {
             
